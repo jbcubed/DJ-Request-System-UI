@@ -1,0 +1,78 @@
+<div [class]="containerClasses">
+  <!-- Label -->
+  <label 
+    *ngIf="showLabel && label" 
+    [for]="uniqueId"
+    [class]="'dj-textarea-label' + (required ? ' required' : '')"
+    [attr.aria-label]="effectiveAriaLabel">
+    {{ label }}
+    <span *ngIf="required" class="required-indicator" aria-label="required">*</span>
+  </label>
+
+  <!-- Textarea Container -->
+  <div class="dj-textarea-input-container">
+    <textarea 
+      [id]="uniqueId"
+      [name]="name || uniqueId"
+      [class]="textareaClasses"
+      [value]="value"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [readonly]="readonly"
+      [required]="required"
+      [attr.maxlength]="maxLength"
+      [attr.minlength]="minLength"
+      [attr.cols]="cols"
+      [rows]="autoGrow ? currentRows : rows"
+      [attr.wrap]="wrap"
+      [attr.aria-label]="!showLabel ? effectiveAriaLabel : null"
+      [attr.aria-describedby]="describedBy || null"
+      [attr.aria-invalid]="hasError"
+      [attr.aria-required]="required"
+      [ngStyle]="textareaStyles"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+      (focus)="onFocus()"></textarea>
+  </div>
+
+  <!-- Character Count -->
+  <div 
+    *ngIf="showCharacterCount" 
+    [id]="charCountId"
+    class="dj-textarea-char-count"
+    [class.near-limit]="isNearCharacterLimit"
+    [class.over-limit]="isOverCharacterLimit"
+    [attr.aria-live]="'polite'">
+    <i class="fas fa-pen me-1" aria-hidden="true"></i>
+    <span *ngIf="maxLength">
+      {{ characterCount }} / {{ maxLength }} characters
+      <span *ngIf="isNearCharacterLimit" class="limit-warning">
+        ({{ remainingCharacters }} remaining)
+      </span>
+    </span>
+    <span *ngIf="!maxLength">
+      {{ characterCount }} characters
+    </span>
+  </div>
+
+  <!-- Help Text -->
+  <div 
+    *ngIf="helpText" 
+    [id]="helpTextId"
+    class="dj-textarea-help"
+    [attr.aria-live]="'polite'">
+    <i class="fas fa-info-circle me-1" aria-hidden="true"></i>
+    {{ helpText }}
+  </div>
+
+  <!-- Error Message -->
+  <div 
+    *ngIf="hasError" 
+    [id]="errorId"
+    class="dj-textarea-error"
+    role="alert"
+    [attr.aria-live]="'assertive'">
+    <i class="fas fa-exclamation-circle me-1" aria-hidden="true"></i>
+    {{ errorMessage }}
+  </div>
+</div>

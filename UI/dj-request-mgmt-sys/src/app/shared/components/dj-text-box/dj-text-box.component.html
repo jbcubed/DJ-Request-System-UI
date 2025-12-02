@@ -1,0 +1,57 @@
+<div [class]="containerClasses">
+  <!-- Label -->
+  <label 
+    *ngIf="showLabel && label" 
+    [for]="uniqueId"
+    [class]="'dj-textbox-label' + (required ? ' required' : '')"
+    [attr.aria-label]="effectiveAriaLabel">
+    {{ label }}
+    <span *ngIf="required" class="required-indicator" aria-label="required">*</span>
+  </label>
+
+  <!-- Input Container -->
+  <div class="dj-textbox-input-container">
+    <input 
+      [id]="uniqueId"
+      [name]="name || uniqueId"
+      [type]="type"
+      [class]="inputClasses"
+      [value]="value"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [readonly]="readonly"
+      [required]="required"
+      [attr.maxlength]="maxLength"
+      [attr.minlength]="minLength"
+      [pattern]="pattern"
+      [autocomplete]="autocomplete"
+      [attr.aria-label]="!showLabel ? effectiveAriaLabel : null"
+      [attr.aria-describedby]="describedBy || null"
+      [attr.aria-invalid]="hasError"
+      [attr.aria-required]="required"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+      (focus)="onFocus()" />
+  </div>
+
+  <!-- Help Text -->
+  <div 
+    *ngIf="helpText" 
+    [id]="helpTextId"
+    class="dj-textbox-help"
+    [attr.aria-live]="'polite'">
+    <i class="fas fa-info-circle me-1" aria-hidden="true"></i>
+    {{ helpText }}
+  </div>
+
+  <!-- Error Message -->
+  <div 
+    *ngIf="hasError" 
+    [id]="errorId"
+    class="dj-textbox-error"
+    role="alert"
+    [attr.aria-live]="'assertive'">
+    <i class="fas fa-exclamation-circle me-1" aria-hidden="true"></i>
+    {{ errorMessage }}
+  </div>
+</div>

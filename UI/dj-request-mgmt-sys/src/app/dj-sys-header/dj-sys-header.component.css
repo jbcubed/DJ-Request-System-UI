@@ -1,0 +1,137 @@
+/* Enhanced navbar styling */
+.navbar-brand {
+  font-size: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+/* Navigation link enhancements */
+.nav-link {
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  margin: 0 2px;
+  padding: 8px 12px !important;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 8px 0;
+  margin-top: 8px;
+}
+
+.dropdown-item {
+  padding: 10px 20px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--bs-primary);
+  color: white;
+  transform: translateX(5px);
+}
+
+/* Badge styling */
+.badge {
+  font-size: 0.7rem;
+  position: relative;
+  top: -2px;
+}
+
+/* Button enhancements */
+.btn-outline-light {
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 991.98px) {
+  .navbar-nav {
+    padding-top: 1rem;
+  }
+  
+  .nav-link {
+    padding: 12px 16px !important;
+    margin: 2px 0;
+  }
+  
+  .dropdown-menu {
+    position: static !important;
+    transform: none !important;
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+    margin-top: 8px;
+    border-radius: 8px;
+  }
+  
+  .btn-outline-light {
+    margin-top: 8px;
+    width: 100%;
+  }
+}
+
+/* Animation for navbar collapse */
+.navbar-collapse {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Custom scrollbar for mobile menu if needed */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .navbar-collapse::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .navbar-collapse::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .navbar-collapse::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+}
+
+/* Accessibility improvements */
+.nav-link:focus,
+.dropdown-toggle:focus,
+.btn:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Loading animation for notifications */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.badge {
+  animation: pulse 2s infinite;
+}
