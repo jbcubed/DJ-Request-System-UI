@@ -2,7 +2,7 @@ import { Component, Input, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-export type LabelPosition = 'above' | 'left';
+export type TextAreaLabelPosition = 'above' | 'left';
 export type ResizeMode = 'none' | 'vertical' | 'horizontal' | 'both';
 
 @Component({
@@ -23,7 +23,7 @@ export class DjTextAreaComponent implements ControlValueAccessor, OnInit {
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() showLabel: boolean = true;
-  @Input() labelPosition: LabelPosition = 'above';
+  @Input() labelPosition: TextAreaLabelPosition = 'above';
   @Input() required: boolean = false;
   @Input() disabled: boolean = false;
   @Input() readonly: boolean = false;

@@ -1,0 +1,39 @@
+<div 
+  *ngIf="isVisible" 
+  class="busy-overlay"
+  [ngStyle]="backdropStyle"
+  role="status"
+  aria-live="polite"
+  aria-label="Loading content">
+  
+  <div class="busy-content">
+    <!-- Animated DJ Turntable Spinner -->
+    <div *ngIf="showSpinner" class="spinner-container">
+      <div class="dj-turntable">
+        <div class="turntable-base"></div>
+        <div class="vinyl-record">
+          <div class="record-center"></div>
+          <div class="record-label">DJ</div>
+        </div>
+        <div class="needle"></div>
+      </div>
+    </div>
+    
+    <!-- Loading Message -->
+    <div class="loading-message">
+      <h4 class="mb-2">{{ message }}</h4>
+      <div class="loading-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+    
+    <!-- Music Notes Animation -->
+    <div class="music-notes">
+      <i class="fas fa-music note note-1"></i>
+      <i class="fas fa-music note note-2"></i>
+      <i class="fas fa-music note note-3"></i>
+    </div>
+  </div>
+</div>

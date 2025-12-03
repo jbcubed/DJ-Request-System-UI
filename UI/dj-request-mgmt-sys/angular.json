@@ -54,7 +54,20 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "outputHashing": "all"
+            },
+            "local": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -67,9 +80,12 @@
             },
             "development": {
               "buildTarget": "dj-request-mgmt-sys:build:development"
+            },
+            "local": {
+              "buildTarget": "dj-request-mgmt-sys:build:local"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "local"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"

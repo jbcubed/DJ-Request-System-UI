@@ -3,7 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, ReactiveFormsModu
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 
-export type LabelPosition = 'above' | 'left';
+export type TextBoxLabelPosition = 'above' | 'left';
 export type TextBoxType = 'text' | 'email' | 'password' | 'tel' | 'url' | 'search';
 
 @Component({
@@ -24,7 +24,7 @@ export class DjTextBoxComponent implements ControlValueAccessor, OnInit, OnDestr
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() showLabel: boolean = true;
-  @Input() labelPosition: LabelPosition = 'above';
+  @Input() labelPosition: TextBoxLabelPosition = 'above';
   @Input() required: boolean = false;
   @Input() disabled: boolean = false;
   @Input() readonly: boolean = false;

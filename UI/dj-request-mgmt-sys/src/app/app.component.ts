@@ -1,22 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { DjSysHeaderComponent } from './dj-sys-header/dj-sys-header.component';
 import { DjTextBoxComponent } from './shared/components/dj-text-box/dj-text-box.component';
 import { DjTextAreaComponent } from './shared/components/dj-text-area/dj-text-area.component';
+import { BusyScreenComponent } from './shared/components/busy-screen/busy-screen.component';
+import { LoadingService } from './shared/services/loading.service';
+import { DjApiService } from './shared/services/dj-api.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, DjSysHeaderComponent, DjTextBoxComponent, DjTextAreaComponent, ReactiveFormsModule, CommonModule],
+  imports: [RouterOutlet, DjSysHeaderComponent, DjTextBoxComponent, DjTextAreaComponent, BusyScreenComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'dj-request-mgmt-sys';
   demoForm!: FormGroup;
+  isLoading$: Observable<boolean>;
+  private destroy$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private loadingService: LoadingService,
+    private djApiService: DjApiService
+  ) {
+    this.isLoading$ = this.loadingService.loading$;
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -86,5 +99,40 @@ export class AppComponent implements OnInit {
 
   resetForm(): void {
     this.demoForm.reset();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  /**
+   * Simulate API call to test loading functionality
+   */
+  simulateApiCall(): void {
+    this.djApiService.simulateLongOperation()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (result) => {
+          console.log('API call result:', result);
+          alert(result);
+        },
+        error: (error) => {
+          console.error('API call error:', error);
+          alert('An error occurred during the API call.');
+        }
+      });
+  }
+
+  /**
+   * Test manual loading control
+   */
+  testManualLoading(): void {
+    this.loadingService.startLoading();
+    
+    setTimeout(() => {
+      this.loadingService.stopLoading();
+      alert('Manual loading test completed!');
+    }, 2000);
   }
 }
