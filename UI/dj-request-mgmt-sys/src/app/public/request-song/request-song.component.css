@@ -1,0 +1,179 @@
+.request-song-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.event-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.event-header h1 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.event-header p {
+  color: #666;
+  font-size: 16px;
+}
+
+.song-request-form {
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+
+.song-request-form h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.form-actions {
+  margin-top: 25px;
+}
+
+.submit-btn {
+  background: #1976d2;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #1565c0;
+}
+
+.submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.submit-error {
+  color: #d32f2f;
+  background: #ffebee;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 15px;
+  border: 1px solid #ffcdd2;
+}
+
+.requests-list {
+  margin-top: 40px;
+}
+
+.requests-list h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.request-item {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.request-content {
+  flex: 1;
+}
+
+.request-name {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.request-description {
+  color: #666;
+  margin-bottom: 8px;
+  font-style: italic;
+}
+
+.request-notes {
+  color: #555;
+  font-size: 14px;
+}
+
+.request-actions {
+  margin-left: 20px;
+}
+
+.vote-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.upvote-btn {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.upvote-btn:hover {
+  background: #f5f5f5;
+  border-color: #1976d2;
+}
+
+.vote-count {
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.no-requests {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 40px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .request-song-container {
+    padding: 15px;
+  }
+  
+  .song-request-form {
+    padding: 20px;
+  }
+  
+  .request-item {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .request-actions {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+}

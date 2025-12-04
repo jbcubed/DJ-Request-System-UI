@@ -1,1 +1,91 @@
+<div class="request-song-container">
+  <!-- Event Header -->
+  <div class="event-header" *ngIf="event">
+    <h1>{{ event.name }}</h1>
+    <p *ngIf="event.description">{{ event.description }}</p>
+  </div>
 
+  <!-- Song Request Form -->
+  <div class="song-request-form">
+    <h2>Request a Song</h2>
+    
+    <form [formGroup]="songRequestForm" (ngSubmit)="onSubmitSongRequest()">
+      <!-- Song Name Input -->
+      <div class="form-field">
+        <app-dj-text-box
+          label="Song Name"
+          placeholder="Enter the song name and artist"
+          [required]="true"
+          formControlName="name">
+        </app-dj-text-box>
+        <div class="error-message" *ngIf="getFieldError('name')">
+          {{ getFieldError('name') }}
+        </div>
+      </div>
+
+      <!-- Notes for DJ -->
+      <div class="form-field">
+        <app-dj-text-area
+          label="Notes for DJ (Optional)"
+          placeholder="Any special notes or requests for the DJ..."
+          [rows]="3"
+          formControlName="description">
+        </app-dj-text-area>
+        <div class="error-message" *ngIf="getFieldError('description')">
+          {{ getFieldError('description') }}
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          class="submit-btn"
+          [disabled]="isSubmitting || songRequestForm.invalid">
+          <span *ngIf="!isSubmitting">Submit Request</span>
+          <span *ngIf="isSubmitting">Submitting...</span>
+        </button>
+      </div>
+
+      <!-- Error Message -->
+      <div class="submit-error" *ngIf="submitError">
+        {{ submitError }}
+      </div>
+    </form>
+  </div>
+
+  <!-- Current Requests List -->
+  <div class="requests-list" *ngIf="requests && requests.length > 0">
+    <h2>Current Requests</h2>
+    
+    <div class="request-item" *ngFor="let request of requests">
+      <div class="request-content">
+        <div class="request-name">{{ request.name }}</div>
+        <div class="request-description" *ngIf="request.description">
+          {{ request.description }}
+        </div>
+        <div class="request-notes" *ngIf="request.requestResponseNotes">
+          <strong>DJ Notes:</strong> {{ request.requestResponseNotes }}
+        </div>
+      </div>
+      
+      <div class="request-actions">
+        <div class="vote-section">
+          <button 
+            class="upvote-btn"
+            (click)="onUpvoteRequest(request)"
+            type="button"
+            title="Upvote this request">
+            ⬆️
+          </button>
+          <span class="vote-count">{{ request.votes }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Requests Message -->
+  <div class="no-requests" *ngIf="requests && requests.length === 0">
+    <p>No song requests yet. Be the first to request a song!</p>
+  </div>
+</div>
