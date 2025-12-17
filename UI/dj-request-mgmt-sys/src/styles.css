@@ -111,6 +111,7 @@ html {
   border-radius: 4px;
   box-sizing: border-box;
   font-family: inherit;
+  transition: box-shadow 500ms ease-in-out;
 }
 
 /* TextArea specific styles */
@@ -122,17 +123,17 @@ html {
 /* Hover State - Shared */
 .dj-textbox-input:hover:not(:disabled):not(:focus),
 .dj-textarea-input:hover:not(:disabled):not(:focus) {
-  border: 3px solid #000000;
+  box-shadow: 0 0 0 3px #000000;
 }
 
 /* Focus State - Clear and Prominent - Shared */
 .dj-textbox-input:focus,
 .dj-textarea-input:focus {
-  border: 3px solid #000000;
   background-color: #ffffff;
   color: #212529;
   outline: none;
-  box-shadow: none !important;
+  box-shadow: 0 0 0 3px #000000;
+  border: 2px solid #6c757d !important;
 }
 
 /* Placeholder - Shared */
@@ -306,299 +307,276 @@ html {
 }
 
 /* ==========================================================================
-   DJ BUTTON COMPONENTS - ACCESSIBLE BUTTON STYLES
+   BOOTSTRAP BUTTON OVERRIDES - ACCESSIBLE & SIMPLE
    ========================================================================== */
 
-/* Base Button Styles - Shared by All Button Types */
-.dj-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.25rem;
-  margin: 0;
-  font-family: inherit;
-  font-size: 1rem;
+/* Base Bootstrap Button Overrides */
+.btn {
+  min-height: 60px;
   font-weight: 600;
-  line-height: 1.5;
-  text-align: center;
-  text-decoration: none;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-  border: 2px solid transparent;
-  border-radius: 4px;
-  box-sizing: border-box;
-  min-height: 44px; /* WCAG minimum touch target size */
-  min-width: 44px;
-  transition: none; /* No transitions for accessibility */
+  transition: box-shadow 300ms ease-in-out;
+  box-shadow: none !important;
 }
 
-/* Focus State - Consistent Across All Buttons */
-.dj-btn:focus {
-  outline: 3px solid #000000;
-  outline-offset: 4px;
-  z-index: 10;
+/* Remove Bootstrap's default focus styles and add our own */
+.btn:focus,
+.btn:hover {
+  box-shadow: 0 0 0 3px #000000 !important;
+  outline: none !important;
 }
 
-/* Disabled State - Consistent Across All Buttons */
-.dj-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  pointer-events: none;
+.btn:active {
+  transform: translateY(1px) !important;
 }
 
-/* Active State - Consistent Across All Buttons */
-.dj-btn:active:not(:disabled) {
-  transform: translateY(1px);
+/* Bootstrap Primary Button - Enhanced Contrast */
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: #ffffff;
 }
 
-/* ==========================================================================
-   STANDARD BUTTON - General Purpose
-   ========================================================================== */
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: #ffffff;
+}
 
-.dj-btn-standard {
-  color: #212529;
-  background-color: #f8f9fa;
+.btn-primary:active {
+  background-color: #0a58ca !important;
+  border-color: #0a58ca !important;
+}
+
+/* Bootstrap Secondary Button - Enhanced Contrast */
+.btn-secondary {
+  background-color: #6c757d;
   border-color: #6c757d;
-}
-
-.dj-btn-standard:hover:not(:disabled):not(:focus) {
-  outline: 3px solid #000000;
-  outline-offset: 4px;
-}
-
-.dj-btn-standard:focus {
-  outline: 3px solid #000000;
-  outline-offset: 4px;
-}
-
-.dj-btn-standard:active:not(:disabled) {
-  color: #212529;
-  background-color: #dee2e6;
-  border-color: #495057;
-}
-
-/* ==========================================================================
-   PRIMARY BUTTON - Main Actions (Save, Submit, Create)
-   ========================================================================== */
-
-.dj-btn-primary {
   color: #ffffff;
-  background-color: #0056b3;
-  border-color: #0056b3;
 }
 
-.dj-btn-primary:hover:not(:disabled):not(:focus) {
-  outline: 3px solid #000000;
-  outline-offset: 4px;
-}
-
-.dj-btn-primary:focus {
-  outline: 3px solid #000000;
-  outline-offset: 4px;
-}
-
-.dj-btn-primary:active:not(:disabled) {
-  color: #ffffff;
-  background-color: #003d82;
-  border-color: #003570;
-}
-
-/* ==========================================================================
-   SECONDARY BUTTON - Alternative Actions (Cancel, Back, Edit)
-   ========================================================================== */
-
-.dj-btn-secondary {
-  color: #0056b3;
-  background-color: #ffffff;
-  border-color: #0056b3;
-}
-
-.dj-btn-secondary:hover:not(:disabled):not(:focus) {
-  outline: 3px solid #000000;
-  outline-offset: 4px;
-}
-
-.dj-btn-secondary:focus {
-  outline: 3px solid #000000;
-  outline-offset: 4px;
-}
-
-.dj-btn-secondary:active:not(:disabled) {
-  color: #ffffff;
-  background-color: #004085;
-  border-color: #004085;
-}
-
-/* ==========================================================================
-   TERTIARY BUTTON - Supporting Actions (View, Details, More Info)
-   ========================================================================== */
-
-.dj-btn-tertiary {
-  color: #6c757d;
-  background-color: #ffffff;
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #6c757d;
   border-color: #6c757d;
+  color: #ffffff;
 }
 
-.dj-btn-tertiary:hover:not(:disabled):not(:focus) {
-  outline: 3px solid #000000;
-  outline-offset: 4px;
+.btn-secondary:active {
+  background-color: #565e64 !important;
+  border-color: #565e64 !important;
 }
 
-.dj-btn-tertiary:focus {
-  outline: 3px solid #000000;
-  outline-offset: 4px;
+/* Bootstrap Success Button */
+.btn-success {
+  background-color: #198754;
+  border-color: #198754;
+  color: #ffffff;
 }
 
-.dj-btn-tertiary:active:not(:disabled) {
-  color: #495057;
-  background-color: #e9ecef;
-  border-color: #495057;
+.btn-success:hover,
+.btn-success:focus {
+  background-color: #198754;
+  border-color: #198754;
+  color: #ffffff;
 }
 
-/* ==========================================================================
-   QUATERNARY BUTTON - Destructive Actions (Delete, Remove, Clear)
-   ========================================================================== */
+.btn-success:active {
+  background-color: #146c43 !important;
+  border-color: #146c43 !important;
+}
 
-.dj-btn-quaternary {
-  color: #721c24;
-  background-color: #ffffff;
+/* Bootstrap Danger Button */
+.btn-danger {
+  background-color: #dc3545;
   border-color: #dc3545;
-}
-
-.dj-btn-quaternary:hover:not(:disabled):not(:focus) {
-  outline: 3px solid #000000;
-  outline-offset: 4px;
-}
-
-.dj-btn-quaternary:focus {
-  outline: 3px solid #000000;
-  outline-offset: 4px;
-}
-
-.dj-btn-quaternary:active:not(:disabled) {
   color: #ffffff;
-  background-color: #b02a37;
-  border-color: #b02a37;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #ffffff;
+}
+
+.btn-danger:active {
+  background-color: #b02a37 !important;
+  border-color: #b02a37 !important;
+}
+
+/* Bootstrap Warning Button - Enhanced Contrast */
+.btn-warning {
+  background-color: #fd7e14;
+  border-color: #fd7e14;
+  color: #000000;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+  background-color: #fd7e14;
+  border-color: #fd7e14;
+  color: #000000;
+}
+
+.btn-warning:active {
+  background-color: #e25d00 !important;
+  border-color: #e25d00 !important;
+}
+
+/* Bootstrap Info Button - Enhanced Contrast */
+.btn-info {
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+  color: #000000;
+}
+
+.btn-info:hover,
+.btn-info:focus {
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+  color: #000000;
+}
+
+.btn-info:active {
+  background-color: #3dd5f3 !important;
+  border-color: #3dd5f3 !important;
+}
+
+/* Bootstrap Light Button - Enhanced Contrast */
+.btn-light {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  color: #212529;
+}
+
+.btn-light:hover,
+.btn-light:focus {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  color: #212529;
+}
+
+.btn-light:active {
+  background-color: #d3d4d5 !important;
+  border-color: #d3d4d5 !important;
+}
+
+/* Bootstrap Dark Button */
+.btn-dark {
+  background-color: #212529;
+  border-color: #212529;
+  color: #ffffff;
+}
+
+.btn-dark:hover,
+.btn-dark:focus {
+  background-color: #212529;
+  border-color: #212529;
+  color: #ffffff;
+}
+
+.btn-dark:active {
+  background-color: #1c1f23 !important;
+  border-color: #1c1f23 !important;
+}
+
+/* Bootstrap Outline Buttons */
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-success,
+.btn-outline-danger,
+.btn-outline-warning,
+.btn-outline-info,
+.btn-outline-light,
+.btn-outline-dark {
+  font-weight: 600;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: #ffffff;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #ffffff;
+}
+
+.btn-outline-success:hover,
+.btn-outline-success:focus {
+  background-color: #198754;
+  border-color: #198754;
+  color: #ffffff;
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #ffffff;
+}
+
+/* Disabled State */
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: none !important;
+  transform: none !important;
 }
 
 /* ==========================================================================
-   BUTTON SIZING VARIATIONS
+   ERROR SUMMARY STYLES
    ========================================================================== */
 
-/* Small Button */
-.dj-btn-sm {
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  min-height: 36px;
-  min-width: 36px;
+/* Error summary links with smooth focus effects */
+.error-summary-link {
+  color: #b45309 !important;
+  display: inline-block;
+  transition: all 0.15s ease-in-out;
+  border-radius: 0.25rem;
+  position: relative;
 }
 
-/* Large Button */
-.dj-btn-lg {
-  padding: 1rem 1.5rem;
-  font-size: 1.125rem;
-  min-height: 52px;
-  min-width: 52px;
+.error-summary-link:hover {
+  color: #92400e !important;
+  text-decoration: underline !important;
 }
 
-/* Full Width Button */
-.dj-btn-block {
-  display: flex;
-  width: 100%;
+.error-summary-link:focus {
+  color: #92400e !important;
+  text-decoration: underline !important;
+  outline: 2px solid #000000;
+  outline-offset: 2px;
 }
 
-/* ==========================================================================
-   BUTTON GROUPS
-   ========================================================================== */
-
-.dj-btn-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
+.error-summary-link:active {
+  color: #78350f !important;
 }
-
-.dj-btn-group .dj-btn {
-  flex-shrink: 0;
-}
-
-/* Responsive Button Groups */
-@media (max-width: 576px) {
-  .dj-btn-group {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .dj-btn-group .dj-btn {
-    width: 100%;
-  }
-}
-
-/* ==========================================================================
-   HIGH CONTRAST AND ACCESSIBILITY ENHANCEMENTS
-   ========================================================================== */
 
 /* High Contrast Mode Support */
 @media (prefers-contrast: high) {
-  .dj-btn {
-    border-width: 3px;
-  }
-  
-  .dj-btn:focus {
-    outline-width: 4px;
-  }
-  
-  .dj-btn-standard {
-    color: #000000;
-    background-color: #ffffff;
-    border-color: #000000;
-  }
-  
-  .dj-btn-primary {
-    color: #ffffff;
-    background-color: #000000;
-    border-color: #000000;
-  }
-  
-  .dj-btn-secondary {
-    color: #000000;
-    background-color: #ffffff;
-    border-color: #000000;
-  }
-  
-  .dj-btn-tertiary {
-    color: #000000;
-    background-color: #ffffff;
-    border-color: #000000;
-  }
-  
-  .dj-btn-quaternary {
-    color: #ffffff;
-    background-color: #800000;
-    border-color: #800000;
-  }
-}
-
-/* Focus Visible for Better Keyboard Navigation */
-.dj-btn:focus-visible {
-  outline: 3px solid #000000;
-  outline-offset: 4px;
-}
-
-/* Ensure Buttons Don't Inherit Text Decoration */
-.dj-btn:link,
-.dj-btn:visited {
-  text-decoration: none;
-}
-
-/* Print Styles */
-@media print {
-  .dj-btn {
-    background: transparent !important;
+  .error-summary-link {
     color: #000000 !important;
-    border: 1px solid #000000 !important;
-    box-shadow: none !important;
+  }
+  
+  .error-summary-link:hover,
+  .error-summary-link:focus {
+    color: #000000 !important;
+    outline: 3px solid #000000;
+  }
+  
+  .btn:focus,
+  .btn:hover {
+    box-shadow: 0 0 0 4px #000000 !important;
+  }
+  
+  .btn {
+    border-width: 2px !important;
   }
 }

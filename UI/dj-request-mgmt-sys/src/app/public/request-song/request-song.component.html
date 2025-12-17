@@ -1,4 +1,7 @@
 <div class="request-song-container">
+  <!-- Error Summary -->
+  <app-error-summary [name]="errorSummaryName"></app-error-summary>
+
   <!-- Event Header -->
   <div class="event-header" *ngIf="event">
     <h1>{{ event.name }}</h1>
@@ -16,11 +19,11 @@
           label="Song Name"
           placeholder="Enter the song name and artist"
           [required]="true"
+          [errorMessage]="getFieldError('name') || ''"
+          [errorSummaryName]="errorSummaryName"
+          instructions="Please type in the full name of the song and artist"
           formControlName="name">
         </app-dj-text-box>
-        <div class="error-message" *ngIf="getFieldError('name')">
-          {{ getFieldError('name') }}
-        </div>
       </div>
 
       <!-- Notes for DJ -->
@@ -29,18 +32,17 @@
           label="Notes for DJ (Optional)"
           placeholder="Any special notes or requests for the DJ..."
           [rows]="3"
+          [errorMessage]="getFieldError('description') || ''"
+          [errorSummaryName]="errorSummaryName"
           formControlName="description">
         </app-dj-text-area>
-        <div class="error-message" *ngIf="getFieldError('description')">
-          {{ getFieldError('description') }}
-        </div>
       </div>
 
       <!-- Submit Button -->
       <div class="form-actions">
         <button 
           type="submit" 
-          class="dj-btn-primary"
+          class="btn btn-primary"
           [disabled]="isSubmitting || songRequestForm.invalid">
           <span *ngIf="!isSubmitting">Submit Request</span>
           <span *ngIf="isSubmitting">Submitting...</span>

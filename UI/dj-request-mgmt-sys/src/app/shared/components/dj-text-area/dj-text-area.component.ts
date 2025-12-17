@@ -2,6 +2,8 @@
 import { Component, Input, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ErrorSummaryService } from '../error-summary/error-summary.service';
+import { DjFormError } from '../../interfaces';
 
 export type TextAreaLabelPosition = 'above' | 'left';
 export type ResizeMode = 'none' | 'vertical' | 'horizontal' | 'both';
@@ -44,6 +46,8 @@ export class DjTextAreaComponent implements ControlValueAccessor, OnInit {
   @Input() ariaDescribedBy: string = '';
   @Input() showCharacterCount: boolean = false;
   @Input() wrap: 'soft' | 'hard' | 'off' = 'soft';
+  @Input() errorSummaryName: string = '';
+  @Input() instructions: string = '';
 
   // Internal properties
   value: string = '';
@@ -54,9 +58,12 @@ export class DjTextAreaComponent implements ControlValueAccessor, OnInit {
   isTouched: boolean = false;
   isFocused: boolean = false;
   currentRows: number = 4;
+  private lastErrorState = false;
 
   private onChange = (value: string) => {};
   private onTouched = () => {};
+
+  constructor(private errorSummaryService: ErrorSummaryService) {}
 
   ngOnInit(): void {
     // Generate unique IDs if not provided
@@ -107,6 +114,11 @@ export class DjTextAreaComponent implements ControlValueAccessor, OnInit {
     this.isTouched = true;
     this.isFocused = false;
     this.onTouched();
+    
+    // Delay error summary update to allow parent change detection to run
+    setTimeout(() => {
+      this.updateErrorSummary();
+    }, 0);
   }
 
   onFocus(): void {
@@ -207,6 +219,37 @@ export class DjTextAreaComponent implements ControlValueAccessor, OnInit {
 
   get effectiveAriaLabel(): string {
     return this.ariaLabel || this.label || this.placeholder;
+  }
+
+  /**
+   * Update error summary when validation state changes
+   */
+  private updateErrorSummary(): void {
+    if (!this.errorSummaryName) {
+      return;
+    }
+
+    const currentErrorState = this.hasError;
+    
+    // If error state changed
+    if (currentErrorState !== this.lastErrorState) {
+      if (currentErrorState && this.errorMessage) {
+        // Add error to summary
+        const error: DjFormError = {
+          id: `${this.uniqueId}-error`,
+          htmlId: this.uniqueId,
+          description: this.errorMessage,
+          summaryName: this.errorSummaryName,
+          instructions: this.instructions
+        };
+        this.errorSummaryService.addError(error);
+      } else {
+        // Remove error from summary
+        this.errorSummaryService.removeError(`${this.uniqueId}-error`, this.errorSummaryName);
+      }
+      
+      this.lastErrorState = currentErrorState;
+    }
   }
 
   get textareaStyles(): { [key: string]: string } {

@@ -1,0 +1,33 @@
+<!--
+Error Summary Component
+Displays a list of form errors with navigation links to the problematic fields
+WCAG compliant with proper ARIA attributes and semantic HTML
+-->
+
+<div *ngIf="hasErrors" class="card border-warning mb-3">
+  <div class="card-body">
+    <div 
+      class="error-summary alert alert-warning mb-0" 
+      role="alert" 
+      aria-labelledby="error-summary-title"
+      tabindex="-1">
+      
+      <h2 id="error-summary-title" class="alert-heading h6 mb-3 text-warning-emphasis">
+        <i class="fas fa-exclamation-triangle me-2" aria-hidden="true"></i>
+        There {{ errors.length === 1 ? 'is' : 'are' }} {{ errors.length }} error{{ errors.length === 1 ? '' : 's' }} on this page
+      </h2>
+      
+      <ul class="list-unstyled mb-0">
+        <li *ngFor="let error of errors; trackBy: trackByErrorId" class="mb-2">
+          <a 
+            [href]="'#' + error.htmlId"
+            class="error-summary-link text-decoration-underline fw-medium"
+            [attr.aria-describedby]="'error-' + error.id"
+            (click)="navigateToElement(error.htmlId, $event)">
+            {{ getFormattedErrorMessage(error) }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

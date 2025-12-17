@@ -8,11 +8,12 @@ import { getEventRequestDto } from '../../shared/interfaces/getRequestDto';
 import { CreateSongRequestDto } from '../../shared/interfaces/createSongRequestDto';
 import { SongRequestService } from './song-request.service';
 import { DjTextBoxComponent, DjTextAreaComponent } from '../../shared/components';
+import { ErrorSummaryComponent } from '../../shared/components/error-summary/error-summary.component';
 import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-request-song',
-  imports: [CommonModule, ReactiveFormsModule, DjTextBoxComponent, DjTextAreaComponent],
+  imports: [CommonModule, ReactiveFormsModule, DjTextBoxComponent, DjTextAreaComponent, ErrorSummaryComponent],
   templateUrl: './request-song.component.html',
   styleUrl: './request-song.component.css'
 })
@@ -30,6 +31,7 @@ export class RequestSongComponent extends UIManagedComponent {
   protected songRequestForm: FormGroup;
   protected isSubmitting = false;
   protected submitError: string | null = null;
+  protected readonly errorSummaryName = 'song-request-form';
 
   constructor() {
     super();
