@@ -1,3 +1,4 @@
+// Copilot: Enterprise Angular, security-first, accessible-by-default, no tutorials.
 import { Component, Input, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';

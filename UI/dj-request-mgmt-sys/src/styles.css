@@ -34,3 +34,571 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #a1a1a1;
 }
+
+/* ==========================================================================
+   DJ FORM COMPONENTS - SHARED STYLES
+   ========================================================================== */
+
+/* Base Container Styles - Shared by TextBox and TextArea */
+.dj-textbox-container,
+.dj-textarea-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.dj-textbox-container.label-left,
+.dj-textarea-container.label-left {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.dj-textbox-container.disabled,
+.dj-textarea-container.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Label Styles - Shared by TextBox and TextArea */
+.dj-textbox-label,
+.dj-textarea-label {
+  font-weight: 600;
+  color: #212529; /* High contrast dark text */
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  display: block;
+}
+
+.label-left .dj-textbox-label {
+  min-width: 120px;
+  flex-shrink: 0;
+  padding-top: 0.5rem; /* Align with input padding */
+}
+
+.label-left .dj-textarea-label {
+  min-width: 120px;
+  flex-shrink: 0;
+  padding-top: 0.75rem; /* Align with textarea padding */
+}
+
+.required-indicator {
+  color: #dc3545;
+  font-weight: bold;
+  margin-left: 0.25rem;
+}
+
+/* Input Container Styles - Shared by TextBox and TextArea */
+.dj-textbox-input-container,
+.dj-textarea-input-container {
+  position: relative;
+  flex: 1;
+}
+
+/* Base Input and Textarea Styles */
+.dj-textbox-input,
+.dj-textarea-input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529; /* High contrast text */
+  background-color: #ffffff;
+  border: 2px solid #6c757d; /* Thicker border for better visibility */
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* TextArea specific styles */
+.dj-textarea-input {
+  resize: vertical;
+  min-height: calc(1.5em + 1.5rem + 4px);
+}
+
+/* Hover State - Shared */
+.dj-textbox-input:hover:not(:disabled):not(:focus),
+.dj-textarea-input:hover:not(:disabled):not(:focus) {
+  border: 3px solid #000000;
+}
+
+/* Focus State - Clear and Prominent - Shared */
+.dj-textbox-input:focus,
+.dj-textarea-input:focus {
+  border: 3px solid #000000;
+  background-color: #ffffff;
+  color: #212529;
+  outline: none;
+  box-shadow: none !important;
+}
+
+/* Placeholder - Shared */
+.dj-textbox-input::placeholder,
+.dj-textarea-input::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+/* Disabled State - Shared */
+.dj-textbox-input:disabled,
+.dj-textarea-input:disabled {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  color: #6c757d;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.dj-textarea-input:disabled {
+  resize: none;
+}
+
+/* Read-only State - Shared */
+.dj-textbox-input:readonly,
+.dj-textarea-input:readonly {
+  background-color: #f8f9fa;
+  border-color: #ced4da;
+  cursor: default;
+}
+
+/* Error State - Shared */
+.dj-textbox-input.is-invalid,
+.dj-textarea-input.is-invalid {
+  border-color: #dc3545;
+  background-color: #fff5f5; /* Light red background */
+}
+
+.dj-textbox-input.is-invalid:focus,
+.dj-textarea-input.is-invalid:focus {
+  border: 3px solid #000000;
+}
+
+/* Help Text - Shared */
+.dj-textbox-help,
+.dj-textarea-help {
+  font-size: 0.875rem;
+  color: #495057; /* Better contrast */
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+/* Error Message - Shared */
+.dj-textbox-error,
+.dj-textarea-error {
+  font-size: 0.875rem;
+  color: #721c24; /* High contrast red */
+  margin-top: 0.25rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   TEXTAREA SPECIFIC STYLES
+   ========================================================================== */
+
+/* Auto-grow specific styles */
+.dj-textarea-input.auto-grow {
+  resize: none;
+  overflow-y: hidden;
+}
+
+/* Character Count */
+.dj-textarea-char-count {
+  font-size: 0.875rem;
+  color: #495057; /* Better contrast */
+  margin-top: 0.25rem;
+  line-height: 1.4;
+  text-align: right;
+  font-weight: 500;
+}
+
+.dj-textarea-char-count.near-limit {
+  color: #b45309; /* High contrast orange */
+  font-weight: 600;
+}
+
+.dj-textarea-char-count.over-limit {
+  color: #721c24; /* High contrast red */
+  font-weight: 600;
+}
+
+.limit-warning {
+  font-weight: 600;
+}
+
+/* Resize Options */
+.dj-textarea-input[style*="resize: none"] {
+  resize: none !important;
+}
+
+.dj-textarea-input[style*="resize: horizontal"] {
+  resize: horizontal !important;
+}
+
+.dj-textarea-input[style*="resize: vertical"] {
+  resize: vertical !important;
+}
+
+.dj-textarea-input[style*="resize: both"] {
+  resize: both !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 576px) {
+  .dj-textbox-container.label-left,
+  .dj-textarea-container.label-left {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .label-left .dj-textbox-label,
+  .label-left .dj-textarea-label {
+    min-width: auto;
+    padding-top: 0;
+  }
+  
+  .dj-textarea-char-count {
+    text-align: left;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ========================================================================== */
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .dj-textbox-input,
+  .dj-textarea-input {
+    border-width: 3px;
+  }
+  
+  .dj-textbox-input:focus,
+  .dj-textarea-input:focus {
+    outline-width: 4px;
+  }
+  
+  .dj-textbox-label,
+  .dj-textarea-label {
+    color: #000000;
+  }
+  
+  .dj-textbox-input,
+  .dj-textarea-input {
+    color: #000000;
+    background-color: #ffffff;
+    border-color: #000000;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   DJ BUTTON COMPONENTS - ACCESSIBLE BUTTON STYLES
+   ========================================================================== */
+
+/* Base Button Styles - Shared by All Button Types */
+.dj-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  margin: 0;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  box-sizing: border-box;
+  min-height: 44px; /* WCAG minimum touch target size */
+  min-width: 44px;
+  transition: none; /* No transitions for accessibility */
+}
+
+/* Focus State - Consistent Across All Buttons */
+.dj-btn:focus {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+  z-index: 10;
+}
+
+/* Disabled State - Consistent Across All Buttons */
+.dj-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Active State - Consistent Across All Buttons */
+.dj-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* ==========================================================================
+   STANDARD BUTTON - General Purpose
+   ========================================================================== */
+
+.dj-btn-standard {
+  color: #212529;
+  background-color: #f8f9fa;
+  border-color: #6c757d;
+}
+
+.dj-btn-standard:hover:not(:disabled):not(:focus) {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+}
+
+.dj-btn-standard:focus {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+}
+
+.dj-btn-standard:active:not(:disabled) {
+  color: #212529;
+  background-color: #dee2e6;
+  border-color: #495057;
+}
+
+/* ==========================================================================
+   PRIMARY BUTTON - Main Actions (Save, Submit, Create)
+   ========================================================================== */
+
+.dj-btn-primary {
+  color: #ffffff;
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.dj-btn-primary:hover:not(:disabled):not(:focus) {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+}
+
+.dj-btn-primary:focus {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+}
+
+.dj-btn-primary:active:not(:disabled) {
+  color: #ffffff;
+  background-color: #003d82;
+  border-color: #003570;
+}
+
+/* ==========================================================================
+   SECONDARY BUTTON - Alternative Actions (Cancel, Back, Edit)
+   ========================================================================== */
+
+.dj-btn-secondary {
+  color: #0056b3;
+  background-color: #ffffff;
+  border-color: #0056b3;
+}
+
+.dj-btn-secondary:hover:not(:disabled):not(:focus) {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+}
+
+.dj-btn-secondary:focus {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+}
+
+.dj-btn-secondary:active:not(:disabled) {
+  color: #ffffff;
+  background-color: #004085;
+  border-color: #004085;
+}
+
+/* ==========================================================================
+   TERTIARY BUTTON - Supporting Actions (View, Details, More Info)
+   ========================================================================== */
+
+.dj-btn-tertiary {
+  color: #6c757d;
+  background-color: #ffffff;
+  border-color: #6c757d;
+}
+
+.dj-btn-tertiary:hover:not(:disabled):not(:focus) {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+}
+
+.dj-btn-tertiary:focus {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+}
+
+.dj-btn-tertiary:active:not(:disabled) {
+  color: #495057;
+  background-color: #e9ecef;
+  border-color: #495057;
+}
+
+/* ==========================================================================
+   QUATERNARY BUTTON - Destructive Actions (Delete, Remove, Clear)
+   ========================================================================== */
+
+.dj-btn-quaternary {
+  color: #721c24;
+  background-color: #ffffff;
+  border-color: #dc3545;
+}
+
+.dj-btn-quaternary:hover:not(:disabled):not(:focus) {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+}
+
+.dj-btn-quaternary:focus {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+}
+
+.dj-btn-quaternary:active:not(:disabled) {
+  color: #ffffff;
+  background-color: #b02a37;
+  border-color: #b02a37;
+}
+
+/* ==========================================================================
+   BUTTON SIZING VARIATIONS
+   ========================================================================== */
+
+/* Small Button */
+.dj-btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  min-height: 36px;
+  min-width: 36px;
+}
+
+/* Large Button */
+.dj-btn-lg {
+  padding: 1rem 1.5rem;
+  font-size: 1.125rem;
+  min-height: 52px;
+  min-width: 52px;
+}
+
+/* Full Width Button */
+.dj-btn-block {
+  display: flex;
+  width: 100%;
+}
+
+/* ==========================================================================
+   BUTTON GROUPS
+   ========================================================================== */
+
+.dj-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.dj-btn-group .dj-btn {
+  flex-shrink: 0;
+}
+
+/* Responsive Button Groups */
+@media (max-width: 576px) {
+  .dj-btn-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .dj-btn-group .dj-btn {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   HIGH CONTRAST AND ACCESSIBILITY ENHANCEMENTS
+   ========================================================================== */
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .dj-btn {
+    border-width: 3px;
+  }
+  
+  .dj-btn:focus {
+    outline-width: 4px;
+  }
+  
+  .dj-btn-standard {
+    color: #000000;
+    background-color: #ffffff;
+    border-color: #000000;
+  }
+  
+  .dj-btn-primary {
+    color: #ffffff;
+    background-color: #000000;
+    border-color: #000000;
+  }
+  
+  .dj-btn-secondary {
+    color: #000000;
+    background-color: #ffffff;
+    border-color: #000000;
+  }
+  
+  .dj-btn-tertiary {
+    color: #000000;
+    background-color: #ffffff;
+    border-color: #000000;
+  }
+  
+  .dj-btn-quaternary {
+    color: #ffffff;
+    background-color: #800000;
+    border-color: #800000;
+  }
+}
+
+/* Focus Visible for Better Keyboard Navigation */
+.dj-btn:focus-visible {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+}
+
+/* Ensure Buttons Don't Inherit Text Decoration */
+.dj-btn:link,
+.dj-btn:visited {
+  text-decoration: none;
+}
+
+/* Print Styles */
+@media print {
+  .dj-btn {
+    background: transparent !important;
+    color: #000000 !important;
+    border: 1px solid #000000 !important;
+    box-shadow: none !important;
+  }
+}

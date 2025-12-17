@@ -1,3 +1,8 @@
+<!--
+Copilot: Angular template, accessible-by-default, semantic HTML,
+WCAG-compliant, keyboard navigable, no inline styles, no tutorials.
+-->
+
 <div [class]="containerClasses">
   <!-- Label -->
   <label 
@@ -43,7 +48,6 @@
     [class.near-limit]="isNearCharacterLimit"
     [class.over-limit]="isOverCharacterLimit"
     [attr.aria-live]="'polite'">
-    <i class="fas fa-pen me-1" aria-hidden="true"></i>
     <span *ngIf="maxLength">
       {{ characterCount }} / {{ maxLength }} characters
       <span *ngIf="isNearCharacterLimit" class="limit-warning">
@@ -61,7 +65,6 @@
     [id]="helpTextId"
     class="dj-textarea-help"
     [attr.aria-live]="'polite'">
-    <i class="fas fa-info-circle me-1" aria-hidden="true"></i>
     {{ helpText }}
   </div>
 
@@ -72,7 +75,6 @@
     class="dj-textarea-error"
     role="alert"
     [attr.aria-live]="'assertive'">
-    <i class="fas fa-exclamation-circle me-1" aria-hidden="true"></i>
     {{ errorMessage }}
   </div>
 </div>

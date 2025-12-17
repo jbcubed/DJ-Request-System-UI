@@ -1,3 +1,8 @@
+<!--
+Copilot: Angular template, accessible-by-default, semantic HTML,
+WCAG-compliant, keyboard navigable, no inline styles, no tutorials.
+-->
+
 <div [class]="containerClasses">
   <!-- Label -->
   <label 
@@ -40,7 +45,6 @@
     [id]="helpTextId"
     class="dj-textbox-help"
     [attr.aria-live]="'polite'">
-    <i class="fas fa-info-circle me-1" aria-hidden="true"></i>
     {{ helpText }}
   </div>
 
@@ -51,7 +55,6 @@
     class="dj-textbox-error"
     role="alert"
     [attr.aria-live]="'assertive'">
-    <i class="fas fa-exclamation-circle me-1" aria-hidden="true"></i>
     {{ errorMessage }}
   </div>
 </div>
